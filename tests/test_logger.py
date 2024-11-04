@@ -84,7 +84,7 @@ class TestSetupLogger(unittest.TestCase):
         self.test_logger = setup_logger(name=self.test_logger_name)
         for handler in self.test_logger.handlers:
             formatter = handler.formatter
-            self.assertEqual(formatter.converter, time.localtime)
+            self.assertEqual(formatter.converter, time.localtime)  # type: ignore
 
     @patch.dict(os.environ, {"TZ": "Asia/Jerusalem"})
     def test_log_formatter_timezone_config_set_correctly(self):
@@ -93,7 +93,7 @@ class TestSetupLogger(unittest.TestCase):
         self.test_logger = setup_logger(name=self.test_logger_name)
         for handler in self.test_logger.handlers:
             formatter = handler.formatter
-            self.assertNotEqual(formatter.converter, time.localtime)
+            self.assertNotEqual(formatter.converter, time.localtime)  # type: ignore
 
 
 if __name__ == "__main__":
