@@ -1,10 +1,10 @@
-import logging.handlers
-import unittest
-from unittest.mock import patch, MagicMock
 import logging
-from typing import Any
+import logging.handlers
 import os
-from src import DEFAULT_LOG_FORMAT, setup_logger, LogFileConfig, DEFAULT_LOG_LEVEL
+import unittest
+from unittest.mock import patch
+
+from src import DEFAULT_LOG_LEVEL, LogFileConfig, setup_logger
 
 
 class TestSetupLogger(unittest.TestCase):
