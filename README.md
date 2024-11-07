@@ -1,2 +1,4 @@
-# python-template
-My Python template repository
+# logging-utils
+Custom Python logging library
+
+TBD

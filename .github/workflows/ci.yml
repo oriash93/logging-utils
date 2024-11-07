@@ -24,3 +24,5 @@ jobs:
         uses: psf/black@stable
       - name: Pyright
         uses: jakebailey/pyright-action@v2
+      - name: Tests
+        run: python -m unittest
