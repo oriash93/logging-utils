@@ -25,5 +25,4 @@ jobs:
       - name: Pyright
         uses: jakebailey/pyright-action@v2
       - name: Tests
-        run: |
-          python -m unittest
+        run: python -m unittest
