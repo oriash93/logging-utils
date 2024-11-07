@@ -1,7 +1,7 @@
 import setuptools
 from setuptools_scm import get_version
 
-version = get_version(root=".", relative_to=__file__)
+version = get_version(root=".", relative_to=__file__, local_scheme="no-local-version")
 
 setuptools.setup(
     name="logging-by-oriash",
