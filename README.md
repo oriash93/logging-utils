@@ -1,4 +1,4 @@
-Logging Utility
+logging-utils
 ===============
 
 A simple, flexible logging utility for Python that enables easy configuration of both console and file logging. This package supports custom log levels, file rotation, and timezone-aware timestamps for streamlined logging in various environments.
