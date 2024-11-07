@@ -6,3 +6,28 @@
 
 [tool.isort]
   profile = "black"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "logging-by-oriash"
+version = "0.1.0.rc"
+authors = [
+  { name="oriash93" },
+]
+description = "Custom Python logging library"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/oriash93/logging-utils"
