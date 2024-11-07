@@ -3,6 +3,7 @@
 
 [tool.pyright]
   pythonVersion = "3.11.10"
+  include = ["src", "tests"]
 
 [tool.isort]
   profile = "black"
