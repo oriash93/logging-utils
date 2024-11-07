@@ -5,25 +5,33 @@ import time
 import unittest
 from unittest.mock import patch
 
-from src import LogFileConfig, setup_logger
+from src import DEFAULT_LOG_FILENAME, DEFAULT_LOG_LEVEL, LogFileConfig, LogLevel, setup_logger
 
 
 class TestLoggingUtils(unittest.TestCase):
     def setUp(self):
-        self.test_logger_name = "test_logger"
-        self.test_log_level = logging.DEBUG
-        self.default_log_level = logging.INFO
+        self.test_log_level: LogLevel = logging.DEBUG
+        self.test_logger_name: str = "test_logger"
+        self.test_log_filename: str = "test.log"
 
     def tearDown(self):
         if self.test_logger:
+            for handler in self.test_logger.handlers:
+                handler.close()
             self.test_logger.handlers.clear()
+
+        for filename in [DEFAULT_LOG_FILENAME, self.test_log_filename]:
+            if os.path.exists(filename):
+                os.remove(filename)
+        logging.shutdown()
+
         logging.shutdown()
 
     def test_setup_logger_with_default_parameters(self):
         self.test_logger = setup_logger(name=self.test_logger_name)
 
         self.assertEqual(self.test_logger.name, self.test_logger_name)
-        self.assertEqual(self.test_logger.level, self.default_log_level)
+        self.assertEqual(self.test_logger.level, DEFAULT_LOG_LEVEL)
 
     def test_setup_logger_with_name_and_log_level(self):
         self.test_logger = setup_logger(name=self.test_logger_name, log_level=self.test_log_level)
@@ -58,8 +66,8 @@ class TestLoggingUtils(unittest.TestCase):
         file_handler: logging.handlers.RotatingFileHandler = self._find_handler_by_type(logging.handlers.RotatingFileHandler)  # type: ignore
         self.assertIsNotNone(file_handler)
         self.assertIsNotNone(file_handler.formatter)
-        self.assertIn("app.log", file_handler.baseFilename)
-        self.assertEqual(file_handler.level, self.default_log_level)
+        self.assertIn(DEFAULT_LOG_FILENAME, file_handler.baseFilename)
+        self.assertEqual(file_handler.level, DEFAULT_LOG_LEVEL)
         self.assertEqual(file_handler.maxBytes, 1 * 1024 * 1024)
         self.assertEqual(file_handler.backupCount, 5)
 
@@ -68,14 +76,14 @@ class TestLoggingUtils(unittest.TestCase):
             name=self.test_logger_name,
             disable_log_file=False,
             log_file_config=LogFileConfig(
-                log_filename="test.log", max_bytes=3_000, backup_count=1, log_file_level=self.test_log_level
+                log_filename=self.test_log_filename, max_bytes=3_000, backup_count=1, log_file_level=self.test_log_level
             ),
         )
 
         file_handler: logging.handlers.RotatingFileHandler = self._find_handler_by_type(logging.handlers.RotatingFileHandler)  # type: ignore
         self.assertIsNotNone(file_handler)
         self.assertIsNotNone(file_handler.formatter)
-        self.assertIn("test.log", file_handler.baseFilename)
+        self.assertIn(self.test_log_filename, file_handler.baseFilename)
         self.assertEqual(file_handler.level, self.test_log_level)
         self.assertEqual(file_handler.maxBytes, 3_000)
         self.assertEqual(file_handler.backupCount, 1)

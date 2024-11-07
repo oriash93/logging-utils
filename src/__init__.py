@@ -5,7 +5,9 @@ from typing import TypeAlias
 
 LogLevel: TypeAlias = int | str
 
+DEFAULT_LOG_LEVEL: LogLevel = logging.INFO
 DEFAULT_LOG_FORMAT: str = "%(asctime)s - %(name)s  - %(levelname)s [%(filename)s:%(lineno)d] - %(message)s"
+DEFAULT_LOG_FILENAME: str = "app.log"
 
 
 @dataclass
@@ -24,7 +26,7 @@ class LogFileConfig:
     """
 
     log_file_level: LogLevel | None = None
-    log_filename: str = "app.log"
+    log_filename: str = DEFAULT_LOG_FILENAME
     max_bytes: int = 1 * 1024 * 1024
     backup_count: int = 5
 
@@ -59,7 +61,7 @@ def setup_logger(
         logging.Logger: The configured logger instance.
     """
     if not log_level:
-        log_level = os.getenv("LOG_LEVEL", logging.INFO)
+        log_level = os.getenv("LOG_LEVEL", DEFAULT_LOG_LEVEL)
 
     logger = logging.getLogger(name)
     logger.setLevel(log_level)
