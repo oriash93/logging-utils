@@ -5,7 +5,7 @@ import time
 import unittest
 from unittest.mock import patch
 
-from src import DEFAULT_LOG_FILENAME, DEFAULT_LOG_LEVEL, LogFileConfig, LogLevel, setup_logger
+from src.logging_utils import DEFAULT_LOG_FILENAME, DEFAULT_LOG_LEVEL, LogFileConfig, LogLevel, setup_logger
 
 
 class TestLoggingUtils(unittest.TestCase):
