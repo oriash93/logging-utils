@@ -19,7 +19,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent"
 ]
-dependencies = []
+dynamic = ["version"]
 
 [project.urls]
 Homepage = "https://github.com/oriash93/logging-utils"
