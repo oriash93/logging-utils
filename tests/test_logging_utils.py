@@ -54,14 +54,14 @@ class TestLoggingUtils(unittest.TestCase):
         self.assertIsNotNone(stream_handler.formatter)
         self.assertEqual(stream_handler.level, self.test_log_level)
 
-    def test_setup_logger_disable_log_file_true_no_file_handler(self):
-        self.test_logger = setup_logger(name=self.test_logger_name, disable_log_file=True)
+    def test_setup_logger_enable_log_file_false_no_file_handler(self):
+        self.test_logger = setup_logger(name=self.test_logger_name, enable_log_file=False)
 
         file_handler = self._find_handler_by_type(logging.handlers.RotatingFileHandler)
         self.assertIsNone(file_handler)
 
     def test_setup_logger_file_handler_with_default_config(self):
-        self.test_logger = setup_logger(name=self.test_logger_name, disable_log_file=False)
+        self.test_logger = setup_logger(name=self.test_logger_name, enable_log_file=True)
 
         file_handler: logging.handlers.RotatingFileHandler = self._find_handler_by_type(logging.handlers.RotatingFileHandler)  # type: ignore
         self.assertIsNotNone(file_handler)
@@ -74,7 +74,7 @@ class TestLoggingUtils(unittest.TestCase):
     def test_setup_logger_file_handler_with_custom_config(self):
         self.test_logger = setup_logger(
             name=self.test_logger_name,
-            disable_log_file=False,
+            enable_log_file=True,
             log_file_config=LogFileConfig(
                 log_filename=self.test_log_filename, max_bytes=3_000, backup_count=1, log_file_level=self.test_log_level
             ),

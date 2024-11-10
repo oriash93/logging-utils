@@ -55,7 +55,7 @@ logger = setup_logger(
     name=__name__,
     log_level=logging.DEBUG,
     log_format="%(asctime)s - %(levelname)s - %(message)s",
-    disable_log_file=False,
+    enable_log_file=True,
     log_file_config=LogFileConfig(
         log_file_level=logging.WARNING,
         log_filename="custom.log",
@@ -85,7 +85,7 @@ Configuration Options
     
 *   **log_format** (str): Format for log messages. Defaults to DEFAULT_LOG_FORMAT.
     
-*   **disable_log_file** (bool): Disables file logging if set to True. Defaults to False.
+*   **enable_log_file** (bool): Enables file logging if set to True. Defaults to False.
     
 *   **log_file_config** (LogFileConfig): Configuration object for file logging settings.
 

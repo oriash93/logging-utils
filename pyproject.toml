@@ -1,3 +1,40 @@
+[build-system]
+requires = ["setuptools>=64", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "logging-by-oriash"
+description = "Custom Python logging library"
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "oriash93" }
+]
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/oriash93/logging-utils"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools_scm]
+root = "."
+relative_to = "pyproject.toml"
+local_scheme = "no-local-version"
+
 [tool.black]
   line-length = 120
 
@@ -7,9 +44,3 @@
 
 [tool.isort]
   profile = "black"
-
-[build-system]
-requires = ["setuptools>=64", "setuptools-scm>=8"]
-build-backend = "setuptools.build_meta"
-
-[tool.setuptools_scm]

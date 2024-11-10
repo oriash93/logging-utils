@@ -42,7 +42,7 @@ def setup_logger(
     name: str,
     log_level: LogLevel | None = None,
     log_format: str = DEFAULT_LOG_FORMAT,
-    disable_log_file: bool = False,
+    enable_log_file: bool = False,
     log_file_config: LogFileConfig = LogFileConfig(),
 ) -> logging.Logger:
     """
@@ -53,7 +53,7 @@ def setup_logger(
         log_level (LogLevel | None): Logging level for the logger. If not set, defaults to
             the environment variable `LOG_LEVEL` or `logging.INFO`.
         log_format (str): The log message format. Defaults to `DEFAULT_LOG_FORMAT`.
-        disable_log_file (bool): If True, disables file logging. Defaults to False.
+        enable_log_file (bool): If True, enables file logging. Defaults to False.
         log_file_config (LogFileConfig): Configuration for file logging, including
             filename, file log level, max bytes per file, and backup count.
 
@@ -75,7 +75,7 @@ def setup_logger(
     stream_handler.setLevel(log_level)
     logger.addHandler(stream_handler)
 
-    if not disable_log_file:
+    if enable_log_file:
         from logging.handlers import RotatingFileHandler
 
         file_handler = RotatingFileHandler(
